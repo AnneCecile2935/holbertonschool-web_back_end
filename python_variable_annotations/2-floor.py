@@ -11,7 +11,7 @@ d'un nombre flottant donné.
 import math
 
 
-def floor(n: float) -> float:
+def floor(n: float) -> int:
     """
     Retourne le plancher (floor) de la valeur flottante n.
 
