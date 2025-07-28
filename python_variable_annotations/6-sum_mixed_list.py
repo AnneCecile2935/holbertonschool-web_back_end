@@ -11,7 +11,7 @@ flottante (`float`), et retourne leur somme en tant que `float`.
 from typing import List, Union
 
 
-def sum_mixed_list(mxd_lst: List[Union[float, int]]) -> float:
+def sum_mixed_list(mxd_lst: List[Union[int, float]]) -> float:
     """
     Calcule la somme des éléments d'une liste contenant des floats et des
     entiers.
