@@ -6,9 +6,10 @@ Ce module utilise la fonction `wait_n` pour exécuter plusieurs appels
 asynchrones et calcule le temps moyen d'exécution par appel.
 """
 
-from concurrent_coroutines import wait_n
-import asyncio
-import time
+from asyncio import run
+from time import time
+
+wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
 def measure_time(n: int, max_delay: int) -> float:
@@ -25,13 +26,13 @@ def measure_time(n: int, max_delay: int) -> float:
         float: Le temps moyen d'exécution par appel (en secondes).
     """
     # On enregistre le temps de départ avec haute précision
-    start = time.perf_counter()
+    start = time()
 
     # Exécution de la coroutine `wait_n` de façon synchrone dans l'event loop
-    asyncio.run(wait_n(n, max_delay))
+    run(wait_n(n, max_delay))
 
     # Temps après exécution
-    end = time.perf_counter()
+    end = time()
 
     # Temps total écoulé
     total_time = end - start
