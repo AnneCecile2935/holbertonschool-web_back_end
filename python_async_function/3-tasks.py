@@ -3,10 +3,11 @@
 Module qui crée une tâche asyncio à partir de la coroutine wait_random.
 """
 
-import asyncio
+from asyncio import create_task, Task
 wait_random = __import__('0-basic_async_syntax').wait_random
 
-def task_wait_random(max_delay: int) -> asyncio.Task:
+
+def task_wait_random(max_delay: int) -> Task:
     """
     Crée une tâche asyncio pour exécuter la coroutine wait_random.
 
@@ -16,4 +17,5 @@ def task_wait_random(max_delay: int) -> asyncio.Task:
     Returns:
         asyncio.Task: Tâche planifiée pour wait_random(max_delay).
     """
-    return asyncio.create_task(wait_random(max_delay))
+    task = create_task(wait_random(max_delay))
+    return task
