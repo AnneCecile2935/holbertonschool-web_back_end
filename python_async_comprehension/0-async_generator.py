@@ -7,6 +7,7 @@ import asyncio
 import random
 from typing import AsyncGenerator
 
+
 async def async_generator() -> AsyncGenerator[float, None]:
     """
     Coroutine qui génère 10 nombres flottants aléatoires entre 0 et 10,
