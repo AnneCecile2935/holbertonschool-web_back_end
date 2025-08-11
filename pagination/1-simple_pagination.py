@@ -61,7 +61,7 @@ class Server:
         """
         Initialise une instance de Server avec dataset vide (None).
         """
-        self.__dataset = None
+        self.__dataset = None   # Le dataset n'est pas encore chargé
 
     def dataset(self) -> List[List]:
         """
@@ -74,12 +74,17 @@ class Server:
             Liste des lignes de données, chaque ligne étant une liste de
             valeurs.
         """
+        # Si le dataset n'a pas encore été chargé
         if self.__dataset is None:
+            # Ouvre le fichier CSV
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
+                # Transforme toutes les lignes du CSV en liste de listes
                 dataset = [row for row in reader]
+            # Ignore la première ligne (en-tête) et stocke les données
             self.__dataset = dataset[1:]
 
+        # Retourne les données mises en cache
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
@@ -105,10 +110,18 @@ class Server:
         AssertionError
             Si `page` ou `page_size` ne sont pas des entiers > 0.
         """
+        # Vérifie que page est un entier strictement positif
         assert isinstance(page, int) and page > 0
+        # Vérifie que page_size est un entier strictement positif
         assert isinstance(page_size, int) and page_size > 0
+        # Récupère les données
         data = self.dataset()
+        # Utilise index_range pour obtenir les indices
+        # de début et fin pour la pagination
         start, end = index_range(page, page_size)
+        # Si l'indice de début est au-delà des données disponibles,
+        # retourne une liste vide
         if start >= len(data):
             return []
+        # Sinon retourne la tranche correspondant à la page demandée
         return data[start:end]
