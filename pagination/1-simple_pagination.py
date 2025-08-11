@@ -7,7 +7,6 @@ pour gérer la pagination d'un dataset chargé à partir d'un fichier CSV
 contenant des données sur les prénoms populaires de bébés.
 """
 import csv
-import math
 from typing import List
 
 
