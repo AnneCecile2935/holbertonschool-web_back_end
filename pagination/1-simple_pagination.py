@@ -26,7 +26,8 @@ def index_range(page, page_size):
     Retourne:
     ---------
     tuple (int, int)
-        Tuple contenant l'indice de début (inclusif) et l'indice de fin (exclusif)
+        Tuple contenant l'indice de début (inclusif) et l'indice de fin
+        (exclusif)
         pour découper une liste correspondant à la page demandée.
 
     Exemple:
@@ -70,7 +71,8 @@ class Server:
         Retourne:
         ---------
         List[List]
-            Liste des lignes de données, chaque ligne étant une liste de valeurs.
+            Liste des lignes de données, chaque ligne étant une liste de
+            valeurs.
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
