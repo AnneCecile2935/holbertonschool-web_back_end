@@ -9,8 +9,6 @@ It connects to the 'logs' database and the 'nginx' collection, then prints:
 2. The number of logs for each HTTP method (GET, POST, PUT, PATCH, DELETE).
 3. The number of GET requests to the path '/status'.
 """
-
-
 from pymongo import MongoClient
 
 
@@ -37,6 +35,7 @@ def main():
 
     # Statistiques par méthode
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    print("Methods:")
     for method in methods:
         count = nginx_collection.count_documents({"method": method})
         print(f"\tmethod {method}: {count}")
