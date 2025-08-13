@@ -26,7 +26,14 @@ def schools_by_topic(mongo_collection, topic):
         >>> for school in schools:
         >>>     print(school.get("name"), school.get("topics"))
     """
+    # Définition de la requête MongoDB :
+    # On cherche tous les documents où la liste 'topics'
+    # contient exactement la valeur de 'topic'
     query = {"topics": topic}
+    # Exécution de la requête avec find()
+    # find() renvoie un curseur qui peut être itéré pour obtenir les documents
     cursor = mongo_collection.find(query)
+    # Transformation du curseur en liste pour pouvoir le retourner facilement
     results = list(cursor)
+    # Retourne la liste des documents correspondant au topic
     return results
