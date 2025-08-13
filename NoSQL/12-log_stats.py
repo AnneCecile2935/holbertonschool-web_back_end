@@ -12,7 +12,7 @@ It connects to the 'logs' database and the 'nginx' collection, then prints:
 from pymongo import MongoClient
 
 
-def main():
+if __name__ == "__main__":
     """
     Connects to MongoDB and prints Nginx log statistics.
 
@@ -44,7 +44,3 @@ def main():
         nginx_collection.count_documents({"method": "GET", "path": "/status"})
     )
     print(f"{status_count} status check")
-
-
-if __name__ == "__main__":
-    main()
