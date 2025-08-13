@@ -26,5 +26,3 @@ status_count = nginx_collection.count_documents(
     {"method": "GET", "path": "/status"}
 )
 print(f"{status_count} status check")
-
-
