@@ -7,22 +7,24 @@ Display statistics about Nginx logs stored in MongoDB.
 
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://127.0.0.1:27017')
-nginx_collection = client.logs.nginx
+if __name__ == "__main__":
+    # Connexion à MongoDB et accès à la collection nginx
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    nginx_collection = client.logs.nginx
 
-# Total number of logs
-x_logs = nginx_collection.count_documents({})
-print(f"{x_logs} logs")
+    # Nombre total de logs
+    x_logs = nginx_collection.count_documents({})
+    print(f"{x_logs} logs")
 
-# Number of logs per HTTP method
-methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-print("Methods:")
-for method in methods:
-    count = nginx_collection.count_documents({"method": method})
-    print(f"\tmethod {method}: {count}")
+    # Statistiques par méthode
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    print("Methods:")
+    for method in methods:
+        count = nginx_collection.count_documents({"method": method})
+        print(f"\tmethod {method}: {count}")
 
-# Number of GET requests to /status
-status_count = nginx_collection.count_documents(
-    {"method": "GET", "path": "/status"}
-)
-print(f"{status_count} status check")
+    # Nombre de requêtes GET sur /status
+    status_count = nginx_collection.count_documents(
+        {"method": "GET", "path": "/status"}
+    )
+    print(f"{status_count} status check")
