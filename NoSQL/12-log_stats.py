@@ -8,23 +8,20 @@ Display statistics about Nginx logs stored in MongoDB.
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-    # Connexion à MongoDB et accès à la collection nginx
     client = MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.logs.nginx
+    nginx = client.logs.nginx
 
-    # Nombre total de logs
-    x_logs = nginx_collection.count_documents({})
-    print(f"{x_logs} logs")
+    # Total number of logs
+    total = nginx.count_documents({})
+    print("{} logs".format(total))
 
-    # Statistiques par méthode
+    # Methods statistics
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print("Methods:")
-    for method in methods:
-        count = nginx_collection.count_documents({"method": method})
-        print(f"\tmethod {method}: {count}")
+    for m in methods:
+        count = nginx.count_documents({"method": m})
+        print("\tmethod {}: {}".format(m, count))
 
-    # Nombre de requêtes GET sur /status
-    status_count = nginx_collection.count_documents(
-        {"method": "GET", "path": "/status"}
-    )
-    print(f"{status_count} status check")
+    # GET /status requests
+    status = nginx.count_documents({"method": "GET", "path": "/status"})
+    print("{} status check".format(status))
