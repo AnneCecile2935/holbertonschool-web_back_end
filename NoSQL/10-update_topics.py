@@ -22,5 +22,5 @@ def update_topics(mongo_collection, name, topics):
     """
     filter = {"name": name}
     new_values = {"$set": {"topics": topics}}
-    result = mongo_collection.update_one{filter, new_values}
+    result = mongo_collection.update_one(filter, new_values)
     return result
