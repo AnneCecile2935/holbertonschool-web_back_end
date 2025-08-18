@@ -1,0 +1,13 @@
+{
+  "name": "ES6_basic",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ES6 basic project Holberton School",
+  "scripts": {
+    "dev": "node 0-main.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
