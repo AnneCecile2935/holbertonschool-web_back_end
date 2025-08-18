@@ -4,7 +4,7 @@
   "type": "module",
   "description": "ES6 basic project Holberton School",
   "scripts": {
-    "dev": "node 0-main.js",
+    "dev": "node",
     "test": "jest"
   },
   "devDependencies": {
