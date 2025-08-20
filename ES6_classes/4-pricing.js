@@ -1,4 +1,4 @@
-import Currency from './3-currency.js'; // Import de la classe Currency
+import Currency from './3-currency'; // Import de la classe Currency
 
 export default class Pricing {
   constructor(amount, currency) {
@@ -12,7 +12,7 @@ export default class Pricing {
       throw new TypeError('currency must be an instance of Currency');
     }
 
-    this._amount = amount;     // Stockage du montant avec underscore
+    this._amount = amount; // Stockage du montant avec underscore
     this._currency = currency; // Stockage de la devise avec underscore
   }
 
