@@ -6,4 +6,5 @@ export default function cleanSet(set, startString) {
             result.push(item.slice(startString.length));
         }
     }
-    return result.join('-').trim(); 
+    return result.join('-').trim();
+}
