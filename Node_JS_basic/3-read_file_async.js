@@ -5,14 +5,16 @@ function countStudents(path) {
     fs.readFile(path, 'utf-8')
       .then((data) => {
         const lines = data.split('\n').filter((line) => line.trim() !== '');
-        const students = lines.slice(1);
+        const students = lines.slice(1); // Ignore l'en-tête
         const studentsByField = {};
-        let totalStudents = 0;
 
+        // Initialise la sortie avec le nombre total d'étudiants
+        let output = `Number of students: ${students.length}\n`;
+
+        // Regroupe les étudiants par domaine
         for (const line of students) {
           const [firstname, , , field] = line.split(',');
           if (firstname && field) {
-            totalStudents += 1;
             if (!studentsByField[field]) {
               studentsByField[field] = [];
             }
@@ -20,11 +22,12 @@ function countStudents(path) {
           }
         }
 
-        console.log(`Number of students: ${totalStudents}`);
+        // Ajoute les étudiants par domaine à la sortie
         for (const [field, firstnames] of Object.entries(studentsByField)) {
-          console.log(`Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}`);
+          output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
         }
-        resolve();
+
+        resolve(output);
       })
       .catch(() => {
         reject(new Error('Cannot load the database'));
