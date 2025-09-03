@@ -13,7 +13,7 @@ app.get('/students', (req, res) => {
   const databaseFile = process.argv[2];
 
   if (!databaseFile) {
-    res.status(400).send('Please provide the database file path as an argument.\n');
+    res.status(400).send('Please provide the database file path as an argument.');
     return; // Important : arrête l'exécution ici
   }
 
@@ -26,8 +26,6 @@ app.get('/students', (req, res) => {
     });
 });
 
-app.listen(1245, () => {
-  console.log('Server running at http://localhost:1245/');
-});
+app.listen(1245);
 
 module.exports = app;
