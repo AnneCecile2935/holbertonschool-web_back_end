@@ -7,11 +7,8 @@ function countStudents(path) {
         const lines = data.split('\n').filter((line) => line.trim() !== '');
         const students = lines.slice(1); // Ignore l'en-tête
         const studentsByField = {};
-
-        // Initialise la sortie avec le nombre total d'étudiants
         let output = `Number of students: ${students.length}\n`;
 
-        // Regroupe les étudiants par domaine
         for (const line of students) {
           const [firstname, , , field] = line.split(',');
           if (firstname && field) {
@@ -22,12 +19,11 @@ function countStudents(path) {
           }
         }
 
-        // Ajoute les étudiants par domaine à la sortie
         for (const [field, firstnames] of Object.entries(studentsByField)) {
           output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
         }
 
-        resolve(output);
+        resolve(output.trim()); // trim() pour éviter les sauts de ligne en trop
       })
       .catch(() => {
         reject(new Error('Cannot load the database'));

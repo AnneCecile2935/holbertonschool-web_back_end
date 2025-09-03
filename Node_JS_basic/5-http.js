@@ -6,14 +6,8 @@ const app = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello Holberton School!\n');
   } else if (req.url === '/students') {
-    const args = process.argv.slice(2); // Récupère les arguments passés au script
-    const databaseFile = args[0]; // Le premier argument est le chemin du fichier CSV
-
-    if (!databaseFile) {
-      res.writeHead(400, { 'Content-Type': 'text/plain' });
-      res.end('Please provide the database file path as an argument.\n');
-      return;
-    }
+    const args = process.argv.slice(2);
+    const databaseFile = args[0];
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.write('This is the list of our students\n');
