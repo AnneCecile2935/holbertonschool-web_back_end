@@ -23,7 +23,7 @@ function countStudents(path) {
           output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
         }
 
-        resolve(output.trim()); // trim() pour éviter les sauts de ligne en trop
+        resolve(output);
       })
       .catch(() => {
         reject(new Error('Cannot load the database'));
