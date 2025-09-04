@@ -31,9 +31,9 @@ export default class StudentsController {
     try {
       const studentsByField = await readDatabase(process.argv[2]);
       const firstnames = studentsByField[major] || [];
-      return response.status(200).set('Content-Type', 'text/plain').send(`List: ${firstnames.join(', ')}`);
+      response.status(200).set('Content-Type', 'text/plain').send(`List: ${firstnames.join(', ')}`);
     } catch (error) {
-      return response.status(500).set('Content-Type', 'text/plain').send('Cannot load the database');
+      response.status(500).set('Content-Type', 'text/plain').send('Cannot load the database');
     }
   }
 }

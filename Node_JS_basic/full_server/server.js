@@ -4,8 +4,6 @@ import setupRoutes from './routes/index';
 const app = express();
 setupRoutes(app);
 
-app.listen(1245, () => {
-  console.log('Server running at http://localhost:1245/');
-});
+app.listen(1245);
 
 export default app;
