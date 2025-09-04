@@ -18,7 +18,7 @@ export default class StudentsController {
         const firstnames = studentsByField[field];
         output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
       }
-      response.status(200).send(output.trim());
+      response.status(200).send(output);
     } catch (error) {
       response.status(500).send(error.message);
     }
