@@ -6,22 +6,19 @@ export default class StudentsController {
       const studentsByField = await readDatabase(process.argv[2]);
       let output = 'This is the list of our students\n';
 
+      const fields = Object.keys(studentsByField).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
       const totalStudents = Object.values(studentsByField).reduce(
         (acc, students) => acc + students.length,
         0,
       );
       output += `Number of students: ${totalStudents}\n`;
-
-      const fields = Object.keys(studentsByField).sort((a, b) =>
-        a.localeCompare(b, { sensitivity: 'base' })
-      );
-
       for (const field of fields) {
-        output += `Number of students in ${field}: ${studentsByField[field].length}. List: ${studentsByField[field].join(', ')}\n`;
+        const firstnames = studentsByField[field];
+        output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
       }
-      return response.status(200).send(output);
+      response.status(200).send(output);
     } catch (error) {
-      return response.status(500).send('Cannot load the database');
+      response.status(500).send('Cannot load the database');
     }
   }
 
