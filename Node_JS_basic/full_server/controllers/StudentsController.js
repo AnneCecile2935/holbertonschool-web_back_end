@@ -1,17 +1,15 @@
-import readDatabase from "../utils";
+import readDatabase from '../utils';
 
 export default class StudentsController {
-	static async getAllStudents(request, response) {
-		try {
-			const studentsByField = await readDatabase(process.argv[2]);
+  static async getAllStudents(request, response) {
+    try {
+      const studentsByField = await readDatabase(process.argv[2]);
       let output = 'This is the list of our students\n';
 
-      const fields = Object.keys(studentsByField).sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: 'base' })
-	    );
+      const fields = Object.keys(studentsByField).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
       const totalStudents = Object.values(studentsByField).reduce(
         (acc, students) => acc + students.length,
-        0
+        0,
       );
       output += `Number of students: ${totalStudents}\n`;
       for (const field of fields) {
@@ -23,6 +21,7 @@ export default class StudentsController {
       response.status(500).send(error.message);
     }
   }
+
   static async getAllStudentsByMajor(request, response) {
     const { major } = request.params;
     if (major !== 'CS' && major !== 'SWE') {
@@ -32,9 +31,9 @@ export default class StudentsController {
     try {
       const studentsByField = await readDatabase(process.argv[2]);
       const firstnames = studentsByField[major] || [];
-      response.status(200).send(`List: ${firstnames.join(', ')}`);
+      return response.status(200).send(`List: ${firstnames.join(', ')}`);
     } catch (error) {
-      response.status(500).send(error.message);
-		}
-	}
+      return response.status(500).send(error.message);
+    }
+  }
 }
