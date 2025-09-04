@@ -16,9 +16,9 @@ export default class StudentsController {
         const firstnames = studentsByField[field];
         output += `Number of students in ${field}: ${firstnames.length}. List: ${firstnames.join(', ')}\n`;
       }
-      response.status(200).send(output);
+      response.status(200).set('Content-Type', 'text/plain').send(output);
     } catch (error) {
-      response.status(500).send('Cannot load the database');
+      response.status(500).set('Content-Type', 'text/plain').send('Cannot load the database');
     }
   }
 
@@ -31,9 +31,9 @@ export default class StudentsController {
     try {
       const studentsByField = await readDatabase(process.argv[2]);
       const firstnames = studentsByField[major] || [];
-      return response.status(200).send(`List: ${firstnames.join(', ')}`);
+      return response.status(200).set('Content-Type', 'text/plain').send(`List: ${firstnames.join(', ')}`);
     } catch (error) {
-      return response.status(500).send('Cannot load the database');
+      return response.status(500).set('Content-Type', 'text/plain').send('Cannot load the database');
     }
   }
 }
